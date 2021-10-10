@@ -1,4 +1,4 @@
-package racinggame.commos;
+package racinggame.commons;
 
 public class Constant {
     public final static Integer CAR_NAME_LENGTH_LIMIT = 5;
@@ -18,4 +18,6 @@ public class Constant {
     public final static String MOVE_DISTANCE_MARK = "-";
     public final static String STATUS_PRINT_FORMAT = "%s : %s";
     public final static String FINAL_WINNER_PRINT_FORMAT = "최종 우승자는 %s 입니다.";
+    public final static String ERROR_PRINT_FORMAT = "[ERROR] %s";
+    public final static String NUMBER_RANGE_OVER_ERR_MSG = "입력할 수 있는 정수의 범위를 초과했습니다. 다시 입력해주세요.";
 }

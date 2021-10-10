@@ -1,7 +1,7 @@
 package racinggame.model;
 
 import nextstep.utils.Randoms;
-import racinggame.commos.Constant;
+import racinggame.commons.Constant;
 
 public class Car implements Comparable<Car> {
     private final String carName;

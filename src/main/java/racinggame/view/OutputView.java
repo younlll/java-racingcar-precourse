@@ -1,6 +1,6 @@
 package racinggame.view;
 
-import racinggame.commos.Constant;
+import racinggame.commons.Constant;
 import racinggame.model.Car;
 import racinggame.model.Cars;
 

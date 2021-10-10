@@ -1,6 +1,6 @@
 package racinggame.model;
 
-import racinggame.commos.Constant;
+import racinggame.commons.Constant;
 
 import java.util.ArrayList;
 import java.util.List;

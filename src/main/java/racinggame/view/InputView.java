@@ -1,7 +1,7 @@
 package racinggame.view;
 
 import nextstep.utils.Console;
-import racinggame.commos.Constant;
+import racinggame.commons.Constant;
 
 public class InputView {
     public static String getCarNames(){
