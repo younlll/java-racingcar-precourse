@@ -2,6 +2,7 @@ package racinggame.controller;
 
 import racinggame.commos.Constant;
 import racinggame.exception.InputValueException;
+import racinggame.model.Car;
 import racinggame.model.Cars;
 import racinggame.view.InputView;
 
@@ -15,6 +16,12 @@ public class RacingGame {
     public void startRacing(){
         cars = inputRacingCars();
         userInputCount = inputRacingTimes();
+
+        System.out.println(Constant.LINE_BREAK + Constant.RESULT_PROMPT);
+
+        for(int count = 0; count < userInputCount; count++){
+            movingCars();
+        }
     }
 
     private Cars inputRacingCars(){
@@ -61,5 +68,11 @@ public class RacingGame {
         }
 
         return userInputCount;
+    }
+
+    private void movingCars(){
+        for(Car car : cars.getCars()){
+            car.movingCar();
+        }
     }
 }

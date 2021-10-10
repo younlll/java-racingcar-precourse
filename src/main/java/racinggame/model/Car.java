@@ -1,8 +1,11 @@
 package racinggame.model;
 
+import nextstep.utils.Randoms;
+import racinggame.commos.Constant;
+
 public class Car implements Comparable<Car> {
     private final String carName;
-    private int moveDistance;
+    private int moveDistance = 0;
 
     public Car(String carName){
         this.carName = carName;
@@ -14,6 +17,13 @@ public class Car implements Comparable<Car> {
 
     public int getMoveDistance(){
         return this.moveDistance;
+    }
+
+    public void movingCar(){
+        int randomMoveCnt = Randoms.pickNumberInRange(Constant.MOVE_COUNT_MIN_LIMIT, Constant.MOVE_COUNT_MAX_LIMIT);
+        if(randomMoveCnt >= Constant.MOVE_FORWARD_RANGE){
+            this.moveDistance += 1;
+        }
     }
 
     @Override
