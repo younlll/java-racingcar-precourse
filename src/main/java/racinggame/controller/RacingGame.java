@@ -58,12 +58,12 @@ public class RacingGame {
     private void isValidCarNames(String inputCarNames){
         String[] carNames = inputCarNames.split(Constant.COMMA);
 
-        if(carNames.length <= 0 || inputCarNames.isEmpty()){
+        if(carNames.length <= 1 || inputCarNames.isEmpty()){
             throw new InputValueException(Constant.CAR_NOR_EXIST_ERR_MSG);
         }
 
         for(String carName : carNames){
-            if(carName.trim().length() > Constant.CAR_NAME_LENGTH_LIMIT){
+            if(carName.length() > Constant.CAR_NAME_LENGTH_LIMIT){
                 throw new InputValueException(Constant.CAR_NAME_LENGTH_ERR_MSG);
             }
         }
