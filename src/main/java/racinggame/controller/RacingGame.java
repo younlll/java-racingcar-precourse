@@ -1,6 +1,6 @@
 package racinggame.controller;
 
-import racinggame.commos.Constant;
+import racinggame.commons.Constant;
 import racinggame.exception.InputValueException;
 import racinggame.model.Car;
 import racinggame.model.Cars;
@@ -8,7 +8,6 @@ import racinggame.view.InputView;
 import racinggame.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,6 +48,8 @@ public class RacingGame {
         while(true){
             try{
                 return Integer.parseInt(isValidCount(InputView.getMoveCount()));
+            }catch (NumberFormatException e){
+                System.out.println(String.format(Constant.ERROR_PRINT_FORMAT, Constant.NUMBER_RANGE_OVER_ERR_MSG));
             }catch(InputValueException e){
                 System.out.println(e.getMessage());
             }
@@ -72,10 +73,10 @@ public class RacingGame {
     private String isValidCount(String userInputCount){
         if(!userInputCount.matches("[+-]?\\d*(\\.\\d+)?")){
             throw new InputValueException(Constant.COUNT_NOT_NUMERIC_ERR_MSG);
-        }else if(Integer.parseInt(userInputCount) < Constant.MOVE_COUNT_MIN){
+        }
+        if(Integer.parseInt(userInputCount) < Constant.MOVE_COUNT_MIN){
             throw new InputValueException(Constant.COUNT_NOT_NUMERIC_ERR_MSG);
         }
-
         return userInputCount;
     }
 

@@ -1,5 +1,7 @@
 package racinggame.exception;
 
+import racinggame.commons.Constant;
+
 public class InputValueException extends RuntimeException{
     public InputValueException(String msg){
         super(msg);
@@ -7,6 +9,6 @@ public class InputValueException extends RuntimeException{
 
     @Override
     public String getMessage(){
-        return String.format("%s %s", "[ERROR]", super.getMessage());
+        return String.format(Constant.ERROR_PRINT_FORMAT, super.getMessage());
     }
 }
