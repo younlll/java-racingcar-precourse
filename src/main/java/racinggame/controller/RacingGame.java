@@ -5,6 +5,12 @@ import racinggame.exception.InputValueException;
 import racinggame.model.Car;
 import racinggame.model.Cars;
 import racinggame.view.InputView;
+import racinggame.view.OutputView;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class RacingGame {
     private Cars cars;
@@ -21,7 +27,10 @@ public class RacingGame {
 
         for(int count = 0; count < userInputCount; count++){
             movingCars();
+            OutputView.printIntermediateStatus(cars);
         }
+
+        OutputView.printWinnerCarName(winnerSelection());
     }
 
     private Cars inputRacingCars(){
@@ -74,5 +83,18 @@ public class RacingGame {
         for(Car car : cars.getCars()){
             car.movingCar();
         }
+    }
+
+    private List<Car> winnerSelection(){
+        int maxDistance = Collections.max(cars.getCars()).getMoveDistance();
+        List<Car> winner = new ArrayList<>();
+
+        for(Car car : cars.getCars()){
+            if(car.getMoveDistance() == maxDistance){
+                winner.add(car);
+            }
+        }
+
+        return winner;
     }
 }

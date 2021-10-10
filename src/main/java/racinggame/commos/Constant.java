@@ -15,4 +15,7 @@ public class Constant {
     public final static String RESULT_PROMPT = "실행 결과";
     public final static String LINE_BREAK = "\n";
     public final static String COMMA = ",";
+    public final static String MOVE_DISTANCE_MARK = "-";
+    public final static String STATUS_PRINT_FORMAT = "%s : %s";
+    public final static String FINAL_WINNER_PRINT_FORMAT = "최종 우승자는 %s 입니다.";
 }
