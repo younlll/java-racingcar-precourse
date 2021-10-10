@@ -35,7 +35,6 @@ public class RacingGame {
         while (true) {
             try {
                 String inputCarNames = InputView.getCarNames();
-                isValidCarNames(inputCarNames);
                 return new Cars(inputCarNames);
             } catch (InputValueException e) {
                 System.out.println(e.getMessage());
@@ -51,20 +50,6 @@ public class RacingGame {
                 System.out.println(String.format(Constant.ERROR_PRINT_FORMAT, Constant.NUMBER_RANGE_OVER_ERR_MSG));
             } catch (InputValueException e) {
                 System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    private void isValidCarNames(String inputCarNames) {
-        String[] carNames = inputCarNames.split(Constant.COMMA);
-
-        if (carNames.length <= 1 || inputCarNames.isEmpty()) {
-            throw new InputValueException(Constant.CAR_NOR_EXIST_ERR_MSG);
-        }
-
-        for (String carName : carNames) {
-            if (carName.length() > Constant.CAR_NAME_LENGTH_LIMIT) {
-                throw new InputValueException(Constant.CAR_NAME_LENGTH_ERR_MSG);
             }
         }
     }
