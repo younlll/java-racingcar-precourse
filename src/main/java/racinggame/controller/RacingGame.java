@@ -1,5 +1,6 @@
 package racinggame.controller;
 
+import racinggame.commos.Constant;
 import racinggame.exception.InputValueException;
 import racinggame.model.Cars;
 import racinggame.view.InputView;
@@ -12,19 +13,53 @@ public class RacingGame {
     }
 
     public void startRacing(){
-        try{
-            cars = inputRacingCars();
-            userInputCount = Integer.parseInt(inputRacingTimes());
-        }catch (InputValueException e){
-
-        }
+        cars = inputRacingCars();
+        userInputCount = inputRacingTimes();
     }
 
     private Cars inputRacingCars(){
-        String inputCarNames = InputView.getCarNames();
-        return new Cars(inputCarNames);
+        while(true) {
+            try{
+                String inputCarNames = InputView.getCarNames();
+                isValidCarNames(inputCarNames);
+                return new Cars(inputCarNames);
+            }catch(InputValueException e){
+                System.out.println(e.getMessage());
+            }
+        }
     }
-    private String inputRacingTimes(){
-        return InputView.getMoveCount();
+
+    private Integer inputRacingTimes(){
+        while(true){
+            try{
+                return Integer.parseInt(isValidCount(InputView.getMoveCount()));
+            }catch(InputValueException e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void isValidCarNames(String inputCarNames){
+        String[] carNames = inputCarNames.split(Constant.COMMA);
+
+        if(carNames.length <= 0 || inputCarNames.isEmpty()){
+            throw new InputValueException(Constant.CAR_NOR_EXIST_ERR_MSG);
+        }
+
+        for(String carName : carNames){
+            if(carName.trim().length() > Constant.CAR_NAME_LENGTH_LIMIT){
+                throw new InputValueException(Constant.CAR_NAME_LENGTH_ERR_MSG);
+            }
+        }
+    }
+
+    private String isValidCount(String userInputCount){
+        if(!userInputCount.matches("[+-]?\\d*(\\.\\d+)?")){
+            throw new InputValueException(Constant.COUNT_NOT_NUMERIC_ERR_MSG);
+        }else if(Integer.parseInt(userInputCount) < Constant.MOVE_COUNT_MIN){
+            throw new InputValueException(Constant.COUNT_NOT_NUMERIC_ERR_MSG);
+        }
+
+        return userInputCount;
     }
 }

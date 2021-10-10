@@ -13,7 +13,7 @@ public class Cars {
         String[] carNames = inputCarNames.split(Constant.COMMA);
 
         for(String carName : carNames){
-            Car car = new Car(carName);
+            Car car = new Car(carName.trim());
             cars.add(car);
         }
         this.cars = cars;
