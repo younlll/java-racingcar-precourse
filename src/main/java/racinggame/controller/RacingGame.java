@@ -14,84 +14,83 @@ import java.util.List;
 public class RacingGame {
     private Cars cars;
     private Integer userInputCount;
-    public RacingGame(){
 
-    }
+    public RacingGame() {}
 
-    public void startRacing(){
+    public void startRacing() {
         cars = inputRacingCars();
         userInputCount = inputRacingTimes();
 
         System.out.println(Constant.LINE_BREAK + Constant.RESULT_PROMPT);
 
-        for(int count = 0; count < userInputCount; count++){
-            movingCars();
+        for (int count = 0; count < userInputCount; count++) {
+            moveCars();
             OutputView.printIntermediateStatus(cars);
         }
 
-        OutputView.printWinnerCarName(winnerSelection());
+        OutputView.printWinnerCarName(selectWinner());
     }
 
-    private Cars inputRacingCars(){
-        while(true) {
-            try{
+    private Cars inputRacingCars() {
+        while (true) {
+            try {
                 String inputCarNames = InputView.getCarNames();
                 isValidCarNames(inputCarNames);
                 return new Cars(inputCarNames);
-            }catch(InputValueException e){
+            } catch (InputValueException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    private Integer inputRacingTimes(){
-        while(true){
-            try{
+    private Integer inputRacingTimes() {
+        while (true) {
+            try {
                 return Integer.parseInt(isValidCount(InputView.getMoveCount()));
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println(String.format(Constant.ERROR_PRINT_FORMAT, Constant.NUMBER_RANGE_OVER_ERR_MSG));
-            }catch(InputValueException e){
+            } catch (InputValueException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    private void isValidCarNames(String inputCarNames){
+    private void isValidCarNames(String inputCarNames) {
         String[] carNames = inputCarNames.split(Constant.COMMA);
 
-        if(carNames.length <= 1 || inputCarNames.isEmpty()){
+        if (carNames.length <= 1 || inputCarNames.isEmpty()) {
             throw new InputValueException(Constant.CAR_NOR_EXIST_ERR_MSG);
         }
 
-        for(String carName : carNames){
-            if(carName.length() > Constant.CAR_NAME_LENGTH_LIMIT){
+        for (String carName : carNames) {
+            if (carName.length() > Constant.CAR_NAME_LENGTH_LIMIT) {
                 throw new InputValueException(Constant.CAR_NAME_LENGTH_ERR_MSG);
             }
         }
     }
 
-    private String isValidCount(String userInputCount){
-        if(!userInputCount.matches("[+-]?\\d*(\\.\\d+)?")){
+    private String isValidCount(String userInputCount) {
+        if (!userInputCount.matches("[+-]?\\d*(\\.\\d+)?")) {
             throw new InputValueException(Constant.COUNT_NOT_NUMERIC_ERR_MSG);
         }
-        if(Integer.parseInt(userInputCount) < Constant.MOVE_COUNT_MIN){
+        if (Integer.parseInt(userInputCount) < Constant.MOVE_COUNT_MIN) {
             throw new InputValueException(Constant.COUNT_NOT_NUMERIC_ERR_MSG);
         }
         return userInputCount;
     }
 
-    private void movingCars(){
-        for(Car car : cars.getCars()){
+    private void moveCars() {
+        for (Car car : cars.getCars()) {
             car.movingCar();
         }
     }
 
-    private List<Car> winnerSelection(){
+    private List<Car> selectWinner() {
         int maxDistance = Collections.max(cars.getCars()).getMoveDistance();
         List<Car> winner = new ArrayList<>();
 
-        for(Car car : cars.getCars()){
-            if(car.getMoveDistance() == maxDistance){
+        for (Car car : cars.getCars()) {
+            if (car.getMoveDistance() == maxDistance) {
                 winner.add(car);
             }
         }
